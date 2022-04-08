@@ -11,8 +11,8 @@ const bodyElement = document.querySelector('body');
 let score = 20;
 let highScore = 0;
 
-// Event listener for guesses made by the user when the check button is clicked.
-document.querySelector('.check').addEventListener('click', function () {
+// Evaluate guess made by the user
+const evaluateGuess = function () {
   const guess = Number(guessElement.value);
   // No input
   if (!guess) {
@@ -38,6 +38,15 @@ document.querySelector('.check').addEventListener('click', function () {
   } else {
     // Guess incorrect, no more guesses allowed
     messageElement.textContent = '💥  You lost the game!';
+  }
+};
+
+// Event listener for guesses made by the user when the check button is clicked.
+document.querySelector('.check').addEventListener('click', evaluateGuess);
+// Event listener for guesses made by the user when the enter key is pressed.
+document.addEventListener('keydown', function (keyboardEvent) {
+  if (keyboardEvent.key === 'Enter') {
+    evaluateGuess();
   }
 });
 
